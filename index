@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#FDF8F3">
+  <title>Для Мамы</title>
+  <style>
+    /* ========================================
+       CSS VARIABLES - Edit colors here
+       ======================================== */
+    :root {
+      --cream: #FDF8F3;
+      --cream-dark: #F5EDE5;
+      --soft-pink: #F4D4D4;
+      --pink-accent: #E8B4B8;
+      --pink-deep: #D4A5A5;
+      --sage-green: #B8C9B8;
+      --sage-dark: #8FA98F;
+      --sage-light: #D4E4D4;
+      --text-primary: #4A4A4A;
+      --text-secondary: #7A7A7A;
+      --white: #FFFFFF;
+      --shadow-soft: rgba(0, 0, 0, 0.06);
+      --shadow-medium: rgba(0, 0, 0, 0.1);
+    }
+
+    /* ========================================
+       RESET & BASE STYLES
+       ======================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+      min-height: 100dvh;
+      color: var(--text-primary);
+      line-height: 1.5;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* ========================================
+       MAIN CONTAINER
+       ======================================== */
+    .app-container {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-top: calc(20px + env(safe-area-inset-top));
+      padding-bottom: calc(40px + env(safe-area-inset-bottom));
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      padding-left: 4px;
+    }
+
+    /* ========================================
+       HERO SECTION - FLOWER BOUQUET
+       ======================================== */
+    .hero {
+      text-align: center;
+      padding: 24px 0 16px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .bouquet-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bouquet-svg {
+      width: 280px;
+      height: 280px;
+    }
+
+    /* Анимация для цветов */
+    .flower-anim-1 {
+      animation: flowerSway1 4s ease-in-out infinite;
+    }
+
+    .flower-anim-2 {
+      animation: flowerSway2 4.5s ease-in-out infinite;
+    }
+
+    .flower-anim-3 {
+      animation: flowerSway3 4.2s ease-in-out infinite;
+    }
+
+    .flower-anim-4 {
+      animation: flowerSway4 5s ease-in-out infinite;
+    }
+
+    .flower-anim-5 {
+      animation: flowerSway5 4.8s ease-in-out infinite;
+    }
+
+    .petal-bloom {
+      animation: bloom 3s ease-in-out infinite;
+    }
+
+    .leaf-anim-left {
+      animation: leafMove1 3s ease-in-out infinite;
+    }
+
+    .leaf-anim-right {
+      animation: leafMove2 3s ease-in-out infinite 0.3s;
+    }
+
+    /* ========================================
+       LOVE JAR SECTION
+       ======================================== */
+    .love-jar-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow:
+        0 4px 24px var(--shadow-soft),
+        0 1px 3px var(--shadow-soft),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .wish-display {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .wish-text {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      text-align: center;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .wish-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .wish-placeholder {
+      font-size: 16px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .wish-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .generate-btn {
+      background: linear-gradient(135deg, var(--pink-accent) 0%, var(--pink-deep) 100%);
+      color: var(--white);
+      border: none;
+      border-radius: 16px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 52px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 16px rgba(232, 180, 184, 0.4);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .generate-btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 2px 8px rgba(232, 180, 184, 0.3);
+    }
+
+    .copy-btn {
+      background: var(--cream);
+      border: 2px solid var(--sage-green);
+      border-radius: 14px;
+      width: 48px;
+      height: 48px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .copy-btn.visible {
+      display: flex;
+    }
+
+    .copy-btn:active {
+      transform: scale(0.92);
+      background: var(--sage-light);
+    }
+
+    .copy-btn.copied {
+      background: var(--sage-green);
+      border-color: var(--sage-dark);
+    }
+
+    .copy-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--sage-dark);
+      transition: stroke 0.2s ease;
+    }
+
+    .copy-btn.copied svg {
+      stroke: var(--white);
+    }
+
+    /* ========================================
+       COUPON BOOK SECTION
+       ======================================== */
+    .coupon-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .coupon-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 2px 12px var(--shadow-soft),
+        0 1px 3px var(--shadow-soft);
+      border: 1px solid rgba(244, 212, 212, 0.5);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 80px;
+    }
+
+    .coupon-card .dashed-line {
+      display: none;
+    }
+
+    .coupon-left {
+      width: 70px;
+      background: linear-gradient(135deg, var(--soft-pink) 0%, var(--pink-accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .coupon-left::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.5) 0,
+        rgba(255,255,255,0.5) 4px,
+        transparent 4px,
+        transparent 8px
+      );
+    }
+
+    .coupon-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .coupon-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--pink-deep);
+    }
+
+    .coupon-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      gap: 12px;
+    }
+
+    .coupon-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: left;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .redeem-btn {
+      background: linear-gradient(135deg, var(--sage-green) 0%, var(--sage-dark) 100%);
+      color: var(--white);
+      border: none;
+      border-radius: 20px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 40px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      flex-shrink: 0;
+    }
+
+    .redeem-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Redeemed state */
+    .coupon-card.redeemed {
+      opacity: 0.65;
+    }
+
+    .coupon-card.redeemed .coupon-left {
+      background: linear-gradient(135deg, var(--cream-dark) 0%, #E5DED6 100%);
+    }
+
+    .coupon-card.redeemed .coupon-icon {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .coupon-card.redeemed .coupon-icon svg {
+      stroke: var(--text-secondary);
+    }
+
+    .coupon-card.redeemed .coupon-title {
+      color: var(--text-secondary);
+      text-decoration: line-through;
+      text-decoration-color: var(--text-secondary);
+    }
+
+    .coupon-card.redeemed .redeem-btn {
+      background: var(--cream-dark);
+      color: var(--text-secondary);
+      cursor: default;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 14px;
+    }
+
+    .redeem-btn .check-icon {
+      display: none;
+    }
+
+    .coupon-card.redeemed .redeem-btn .check-icon {
+      display: block;
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .footer-heart {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      margin: 0 4px;
+    }
+
+    /* ========================================
+       ANIMATIONS
+       ======================================== */
+    @keyframes flowerSway1 {
+      0%, 100% { transform: translate(0, 0) rotate(-1deg); }
+      50% { transform: translate(1px, -2px) rotate(1deg); }
+    }
+
+    @keyframes flowerSway2 {
+      0%, 100% { transform: translate(0, 0) rotate(1deg); }
+      50% { transform: translate(-1px, -2px) rotate(-1deg); }
+    }
+
+    @keyframes flowerSway3 {
+      0%, 100% { transform: translate(0, 0) rotate(-0.5deg); }
+      50% { transform: translate(1px, -1px) rotate(0.5deg); }
+    }
+
+    @keyframes flowerSway4 {
+      0%, 100% { transform: translate(0, 0) rotate(0.5deg); }
+      50% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+    }
+
+    @keyframes flowerSway5 {
+      0%, 100% { transform: translate(0, 0) rotate(-0.5deg); }
+      50% { transform: translate(0px, -2px) rotate(0.5deg); }
+    }
+
+    @keyframes bloom {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    @keyframes leafMove1 {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    @keyframes leafMove2 {
+      0%, 100% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================================
+       RESPONSIVE ADJUSTMENTS
+       ======================================== */
+    @media (max-width: 380px) {
+      .coupon-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .bouquet-svg {
+        width: 240px;
+        height: 240px;
+      }
+    }
+
+    @media (min-width: 500px) {
+      .app-container {
+        padding: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- ========================================
+         HERO SECTION - ANIMATED BOUQUET
+         ======================================== -->
+    <section class="hero section">
+      <h1 class="hero-title">С Днём Рождения</h1>
+      <p class="hero-subtitle">Маленький подарок, сделанный с любовью</p>
+
+      <div class="bouquet-container">
+        <svg class="bouquet-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Градиенты для лилий -->
+            <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffb6c1"/>
+              <stop offset="100%" stop-color="#ff91a4"/>
+            </linearGradient>
+            <linearGradient id="creamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff5ee"/>
+              <stop offset="100%" stop-color="#ffe4e1"/>
+            </linearGradient>
+            <linearGradient id="coralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffb07c"/>
+              <stop offset="100%" stop-color="#ff8c69"/>
+            </linearGradient>
+            <linearGradient id="lavenderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#e6e6fa"/>
+              <stop offset="100%" stop-color="#dda0dd"/>
+            </linearGradient>
+            <linearGradient id="peachGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffdab9"/>
+              <stop offset="100%" stop-color="#ffb6a3"/>
+            </linearGradient>
+            <!-- Градиенты для нарциссов -->
+            <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff9c4"/>
+              <stop offset="100%" stop-color="#ffeb3b"/>
+            </linearGradient>
+            <linearGradient id="greenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#81c784"/>
+              <stop offset="100%" stop-color="#4caf50"/>
+            </linearGradient>
+            <!-- Тень для центрального цветка -->
+            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#d4a5a5" flood-opacity="0.3"/>
+            </filter>
+          </defs>
+
+          <!-- Стебли (11 штук) -->
+          <path d="M140,270 Q130,220 85,145" stroke="url(#greenGrad)" stroke-width="3" fill="none"/>
+          <path d="M140,270 Q140,200 140,85" stroke="url(#greenGrad)" stroke-width="4" fill="none"/>
+          <path d="M140,270 Q150,220 195,140" stroke="url(#greenGrad)" stroke-width="3" fill="none"/>
+          <path d="M140,270 Q125,230 55,155" stroke="url(#greenGrad)" stroke-width="2.5" fill="none"/>
+          <path d="M140,270 Q155,230 225,150" stroke="url(#greenGrad)" stroke-width="2.5" fill="none"/>
+          <path d="M140,270 Q120,240 70,180" stroke="url(#greenGrad)" stroke-width="2" fill="none"/>
+          <path d="M140,270 Q160,240 210,175" stroke="url(#greenGrad)" stroke-width="2" fill="none"/>
+          <path d="M140,270 Q135,210 105,120" stroke="url(#greenGrad)" stroke-width="2.5" fill="none"/>
+          <path d="M140,270 Q145,210 175,115" stroke="url(#greenGrad)" stroke-width="2.5" fill="none"/>
+          <path d="M140,270 Q130,250 95,190" stroke="url(#greenGrad)" stroke-width="2" fill="none"/>
+          <path d="M140,270 Q150,250 185,185" stroke="url(#greenGrad)" stroke-width="2" fill="none"/>
+
+          <!-- Листья -->
+          <g class="leaf-anim-left">
+            <ellipse cx="105" cy="240" rx="10" ry="25" fill="#81c784" transform="rotate(-25 105 240)"/>
+          </g>
+          <g class="leaf-anim-right">
+            <ellipse cx="175" cy="240" rx="10" ry="25" fill="#81c784" transform="rotate(25 175 240)"/>
+          </g>
+          <ellipse cx="125" cy="255" rx="7" ry="18" fill="#9ccc9c" transform="rotate(-15 125 255)"/>
+          <ellipse cx="155" cy="255" rx="7" ry="18" fill="#9ccc9c" transform="rotate(15 155 255)"/>
+
+          <!-- Нарцисс 1 -->
+          <g transform="translate(55, 155)">
+            <g class="flower-anim-4">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-10" rx="5" ry="10" fill="#fffde7"/>
+                <ellipse cx="0" cy="-10" rx="5" ry="10" fill="#fffde7" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-10" rx="5" ry="10" fill="#fffde7" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-10" rx="5" ry="10" fill="#fffde7" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-10" rx="5" ry="10" fill="#fffde7" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-10" rx="5" ry="10" fill="#fffde7" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="6" fill="url(#yellowGrad)" stroke="#ffa000" stroke-width="1.5"/>
+              <circle cx="0" cy="0" r="3" fill="#ffa000"/>
+            </g>
+          </g>
+
+          <!-- Нарцисс 2 -->
+          <g transform="translate(225, 150)">
+            <g class="flower-anim-5">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-9" rx="4.5" ry="9" fill="#fffde7"/>
+                <ellipse cx="0" cy="-9" rx="4.5" ry="9" fill="#fffde7" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-9" rx="4.5" ry="9" fill="#fffde7" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-9" rx="4.5" ry="9" fill="#fffde7" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-9" rx="4.5" ry="9" fill="#fffde7" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-9" rx="4.5" ry="9" fill="#fffde7" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="5.5" fill="url(#yellowGrad)" stroke="#ffa000" stroke-width="1.5"/>
+              <circle cx="0" cy="0" r="2.5" fill="#ffa000"/>
+            </g>
+          </g>
+
+          <!-- Нарцисс 3 -->
+          <g transform="translate(70, 180)">
+            <g class="flower-anim-2">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="5" fill="url(#yellowGrad)" stroke="#ffa000" stroke-width="1.5"/>
+              <circle cx="0" cy="0" r="2.5" fill="#ffa000"/>
+            </g>
+          </g>
+
+          <!-- Нарцисс 4 -->
+          <g transform="translate(210, 175)">
+            <g class="flower-anim-3">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-8" rx="4" ry="8" fill="#fffde7" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="5" fill="url(#yellowGrad)" stroke="#ffa000" stroke-width="1.5"/>
+              <circle cx="0" cy="0" r="2.5" fill="#ffa000"/>
+            </g>
+          </g>
+
+          <!-- Нарцисс 5 -->
+          <g transform="translate(95, 190)">
+            <g class="flower-anim-1">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="4.5" fill="url(#yellowGrad)" stroke="#ffa000" stroke-width="1"/>
+              <circle cx="0" cy="0" r="2" fill="#ffa000"/>
+            </g>
+          </g>
+
+          <!-- Нарцисс 6 -->
+          <g transform="translate(185, 185)">
+            <g class="flower-anim-4">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-7" rx="3.5" ry="7" fill="#fffde7" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="4.5" fill="url(#yellowGrad)" stroke="#ffa000" stroke-width="1"/>
+              <circle cx="0" cy="0" r="2" fill="#ffa000"/>
+            </g>
+          </g>
+
+          <!-- Лилия 1 (розовая слева) -->
+          <g transform="translate(85, 145)">
+            <g class="flower-anim-2">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-14" rx="6" ry="14" fill="url(#pinkGrad)"/>
+                <ellipse cx="0" cy="-14" rx="6" ry="14" fill="url(#pinkGrad)" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-14" rx="6" ry="14" fill="url(#pinkGrad)" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-14" rx="6" ry="14" fill="url(#pinkGrad)" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-14" rx="6" ry="14" fill="url(#pinkGrad)" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-14" rx="6" ry="14" fill="url(#pinkGrad)" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="4" fill="#fff5f5"/>
+              <circle cx="0" cy="-5" r="1.5" fill="#8b4513"/>
+              <circle cx="3" cy="-2" r="1.5" fill="#8b4513"/>
+              <circle cx="-3" cy="-2" r="1.5" fill="#8b4513"/>
+            </g>
+          </g>
+
+          <!-- Лилия 2 (коралловая справа) -->
+          <g transform="translate(195, 140)">
+            <g class="flower-anim-3">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-15" rx="6.5" ry="15" fill="url(#coralGrad)"/>
+                <ellipse cx="0" cy="-15" rx="6.5" ry="15" fill="url(#coralGrad)" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-15" rx="6.5" ry="15" fill="url(#coralGrad)" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-15" rx="6.5" ry="15" fill="url(#coralGrad)" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-15" rx="6.5" ry="15" fill="url(#coralGrad)" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-15" rx="6.5" ry="15" fill="url(#coralGrad)" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="4" fill="#fff5f0"/>
+              <circle cx="0" cy="-5" r="1.5" fill="#8b4513"/>
+              <circle cx="3" cy="-2" r="1.5" fill="#8b4513"/>
+              <circle cx="-3" cy="-2" r="1.5" fill="#8b4513"/>
+            </g>
+          </g>
+
+          <!-- Лилия 3 (лавандовая слева-центр) -->
+          <g transform="translate(105, 120)">
+            <g class="flower-anim-5">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#lavenderGrad)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#lavenderGrad)" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#lavenderGrad)" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#lavenderGrad)" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#lavenderGrad)" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#lavenderGrad)" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="5" fill="#f8f4ff"/>
+              <circle cx="0" cy="-6" r="1.5" fill="#8b4513"/>
+              <circle cx="4" cy="-3" r="1.5" fill="#8b4513"/>
+              <circle cx="-4" cy="-3" r="1.5" fill="#8b4513"/>
+            </g>
+          </g>
+
+          <!-- Лилия 4 (персиковая справа-центр) -->
+          <g transform="translate(175, 115)">
+            <g class="flower-anim-4">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#peachGrad)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#peachGrad)" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#peachGrad)" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#peachGrad)" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#peachGrad)" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-16" rx="7" ry="16" fill="url(#peachGrad)" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="5" fill="#fff8f5"/>
+              <circle cx="0" cy="-6" r="1.5" fill="#8b4513"/>
+              <circle cx="4" cy="-3" r="1.5" fill="#8b4513"/>
+              <circle cx="-4" cy="-3" r="1.5" fill="#8b4513"/>
+            </g>
+          </g>
+
+          <!-- Лилия 5 (ЦЕНТРАЛЬНАЯ - кремовая с тенью) -->
+          <g transform="translate(140, 85)" filter="url(#softShadow)">
+            <g class="flower-anim-1">
+              <g class="petal-bloom">
+                <ellipse cx="0" cy="-22" rx="10" ry="22" fill="url(#creamGrad)" stroke="#f5d0c5" stroke-width="0.5"/>
+                <ellipse cx="0" cy="-22" rx="10" ry="22" fill="url(#creamGrad)" stroke="#f5d0c5" stroke-width="0.5" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-22" rx="10" ry="22" fill="url(#creamGrad)" stroke="#f5d0c5" stroke-width="0.5" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-22" rx="10" ry="22" fill="url(#creamGrad)" stroke="#f5d0c5" stroke-width="0.5" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-22" rx="10" ry="22" fill="url(#creamGrad)" stroke="#f5d0c5" stroke-width="0.5" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-22" rx="10" ry="22" fill="url(#creamGrad)" stroke="#f5d0c5" stroke-width="0.5" transform="rotate(300)"/>
+              </g>
+              <circle cx="0" cy="0" r="7" fill="#fffaf5"/>
+              <circle cx="0" cy="-9" r="2" fill="#cd853f"/>
+              <circle cx="6" cy="-5" r="2" fill="#cd853f"/>
+              <circle cx="-6" cy="-5" r="2" fill="#cd853f"/>
+              <circle cx="4" cy="3" r="1.5" fill="#cd853f"/>
+              <circle cx="-4" cy="3" r="1.5" fill="#cd853f"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ========================================
+         LOVE JAR SECTION
+         ======================================== -->
+    <section class="section">
+      <h2 class="section-title">Баночка Любви</h2>
+      <div class="love-jar-card">
+        <div class="wish-display">
+          <p id="wishText" class="wish-text wish-placeholder">Нажми, чтобы получить особое послание</p>
+        </div>
+        <div class="wish-actions">
+          <button id="generateBtn" class="generate-btn">Получить Пожелание</button>
+          <button id="copyBtn" class="copy-btn" aria-label="Copy to clipboard">
+            <!-- Clipboard icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         COUPON BOOK SECTION
+         ======================================== -->
+    <section class="section">
+      <h2 class="section-title">Книга Купонов</h2>
+      <div id="couponGrid" class="coupon-grid">
+        <!-- Coupons will be rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="footer">
+      Сделано с
+      <svg class="footer-heart" viewBox="0 0 24 24" fill="#E8B4B8" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      для Мамы
+    </footer>
+  </div>
+
+  <script>
+    /* ========================================
+       НАСТРОЙКИ ДЛЯ РЕДАКТИРОВАНИЯ
+       Изменяй эти массивы для кастомизации
+       ======================================== */
+
+    // МАССИВ ПОЖЕЛАНИЙ - Добавляй или изменяй сообщения здесь
+    const wishes = [
+      "Твоя любовь — это фундамент, на котором держится наша семья. Спасибо тебе за всё.",
+      "Мир стал лучше, потому что в нём есть ты. Я так благодарен, что ты моя мама.",
+      "Твоя сила вдохновляет меня каждый день. Ты делаешь невозможное возможным.",
+      "Спасибо, что всегда веришь в меня, даже когда я сам в себя не верю.",
+      "Твои объятия обладают волшебной целительной силой. Это научный факт.",
+      "Надеюсь, ты знаешь, как много для меня значат твоя доброта и терпение.",
+      "Ты научила меня, что любовь — это не просто чувство, а действие. Спасибо за этот урок.",
+      "За каждым успешным мужчиной стоит великая мама. Это ты.",
+      "Твои жертвы никогда не остаются незамеченными. Я ценю тебя больше, чем могу выразить словами.",
+      "Ты превращаешь обычные моменты в волшебные. Это редкий дар.",
+      "Спасибо за все те разы, когда ты ставила мои потребности выше своих.",
+      "Твоя мудрость помогала мне пережить самые трудные моменты в жизни.",
+      "Я горжусь тем, что я твой сын. Лучшее во мне — от тебя.",
+      "Сколько бы мне ни было лет, ты всегда будешь мне нужна, мама.",
+      "Ты мой первый друг, лучший друг и друг навсегда."
+    ];
+
+    // МАССИВ КУПОНОВ - Редактируй названия и иконки здесь
+    // Доступные иконки: coffee, phone, home, heart, star, gift
+    const coupons = [
+      { id: 1, title: "Завтрак в постель", icon: "coffee" },
+      { id: 2, title: "Помощь с техникой", icon: "phone" },
+      { id: 3, title: "Выходной от домашних дел", icon: "home" },
+      { id: 4, title: "Выбор фильма на вечер", icon: "star" }
+    ];
+
+    /* ========================================
+       SVG ICONS
+       ======================================== */
+    const icons = {
+      coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+        <line x1="6" y1="1" x2="6" y2="4"></line>
+        <line x1="10" y1="1" x2="10" y2="4"></line>
+        <line x1="14" y1="1" x2="14" y2="4"></line>
+      </svg>`,
+      phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+      </svg>`,
+      home: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>`,
+      heart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>`,
+      star: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>`,
+      gift: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+        <rect x="2" y="7" width="20" height="5"></rect>
+        <line x1="12" y1="22" x2="12" y2="7"></line>
+        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+      </svg>`,
+      check: `<svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>`
+    };
+
+    /* ========================================
+       DOM REFERENCES
+       ======================================== */
+    const wishText = document.getElementById('wishText');
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const couponGrid = document.getElementById('couponGrid');
+
+    /* ========================================
+       LOCAL STORAGE KEYS
+       ======================================== */
+    const STORAGE_KEY = 'mothersDayRedeemedCoupons';
+
+    /* ========================================
+       LOVE JAR FUNCTIONALITY
+       ======================================== */
+    let currentWish = '';
+    let lastWishIndex = -1;
+
+    function generateWish() {
+      // Get a random wish that's different from the last one
+      let newIndex;
+      do {
+        newIndex = Math.floor(Math.random() * wishes.length);
+      } while (newIndex === lastWishIndex && wishes.length > 1);
+
+      lastWishIndex = newIndex;
+      currentWish = wishes[newIndex];
+
+      // Animate out
+      wishText.classList.remove('visible');
+      wishText.classList.remove('wish-placeholder');
+
+      setTimeout(() => {
+        wishText.textContent = currentWish;
+        wishText.classList.add('visible');
+        copyBtn.classList.add('visible');
+      }, 300);
+    }
+
+    async function copyToClipboard() {
+      if (!currentWish) return;
+
+      try {
+        await navigator.clipboard.writeText(currentWish);
+        copyBtn.classList.add('copied');
+
+        // Update icon to checkmark temporarily
+        copyBtn.innerHTML = icons.check;
+
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>`;
+        }, 1500);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    }
+
+    generateBtn.addEventListener('click', generateWish);
+    copyBtn.addEventListener('click', copyToClipboard);
+
+    /* ========================================
+       COUPON BOOK FUNCTIONALITY
+       ======================================== */
+    function getRedeemedCoupons() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveRedeemedCoupons(redeemedIds) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(redeemedIds));
+    }
+
+    function renderCoupons() {
+      const redeemed = getRedeemedCoupons();
+
+      couponGrid.innerHTML = coupons.map(coupon => {
+        const isRedeemed = redeemed.includes(coupon.id);
+        return `
+          <div class="coupon-card ${isRedeemed ? 'redeemed' : ''}" data-id="${coupon.id}">
+            <div class="coupon-left">
+              <div class="coupon-icon">
+                ${icons[coupon.icon] || icons.gift}
+              </div>
+            </div>
+            <div class="coupon-content">
+              <span class="coupon-title">${coupon.title}</span>
+              <button class="redeem-btn" ${isRedeemed ? 'disabled' : ''}>
+                ${isRedeemed ? icons.check + ' Готово' : 'Активировать'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Add click listeners to redeem buttons
+      document.querySelectorAll('.coupon-card:not(.redeemed) .redeem-btn').forEach(btn => {
+        btn.addEventListener('click', handleRedeem);
+      });
+    }
+
+    function handleRedeem(e) {
+      const card = e.target.closest('.coupon-card');
+      const id = parseInt(card.dataset.id);
+
+      // Update visual state
+      card.classList.add('redeemed');
+      const btn = card.querySelector('.redeem-btn');
+      btn.disabled = true;
+      btn.innerHTML = icons.check + ' Готово';
+
+      // Save to localStorage
+      const redeemed = getRedeemedCoupons();
+      if (!redeemed.includes(id)) {
+        redeemed.push(id);
+        saveRedeemedCoupons(redeemed);
+      }
+    }
+
+    // Initialize coupons on page load
+    renderCoupons();
+
+    /* ========================================
+       TOUCH FEEDBACK ENHANCEMENT
+       ======================================== */
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('touchstart', () => {}, { passive: true });
+    });
+  </script>
+</body>
+</html>
